@@ -178,23 +178,31 @@
            where \(s_t\!\in\!\mathcal{S}\) is the state, \(a_t\!\in\!\mathcal{A}\) is the 
            action, \(\mathcal{P}\) is the transition kernel, \(R\) is the reward, and 
            \(\gamma\!\in\!(0,1)\) is the discount factor.
+           <br>
+           <br>
 
-           <p><b>State space: \(s_t = \left[\vec{p_t}, \vec{I_t}, \mathbf{A}_t, \vec{x_t}^{\text{BS}},
-             \vec{x_t}^{\text{U}}\right]_{t \in T,\text{BS} \in N_B, \text{U} \in N_U}\)</b></p>
+           <p><b>State space:</b> \(s_t = \left[\vec{p_t}, \vec{I_t}, \mathbf{A}_t, \vec{x_t}^{\text{BS}},
+             \vec{x_t}^{\text{U}}\right]_{t \in T,\text{BS} \in N_B, \text{U} \in N_U}\)</p>
+             <br>
             <p><b>Action space:</b> \(a_t = \left\{\left(p_{\text{BS}}^{\text{adj}}, w_{\text{BS}}^{\text{alloc}},
               s_{\text{U}}^{\text{score}}\right)\right\}_{\text{BS} = 1}^{N_B}\)</p>
-            <p><b>Channel dynamics: The log-normal shadowing (\(\Psi_{\text{BS-U}}\)) and
-               downlink effective power gain (\(H_{\text{BS-U}}\))</b> \begin{align*}
-    \Psi_{\text{BS-U}} = 10^{\nicefrac{X_{\text{BS-U}}}{10}}, 
+              <br>
+            <p><b>Channel dynamics:</b> The log-normal shadowing (\(\Psi_{\text{BS-U}}\)) and
+               downlink effective power gain (\(H_{\text{BS-U}}\)) \begin{align*}
+    \Psi_{\text{BS-U}} = 10^{\frac{X_{\text{BS-U}}}{10}}, 
     \quad X_{\text{BS-U}} \sim \mathcal{N}\left(0, \sigma_{\text{sh}}^{2}\right) \; \text{in dB}\\
     H_{\text{BS-U}} = \frac{S_{\text{BS-U}}}{\left(d_{\text{BS-U}}\right)^{\eta} \cdot 
     \Psi_{\text{BS-U}}}
 \end{align*}</p>
+<br>
         <p><b>SINR:</b> \(\text{SINR}_\text{U} = \frac{p_{\text{BS-U}} \cdot H_{\text{BS-U}}}{\sum_{\text{BS' \(\neq\) BS}}
           \left(p_{\text{BS-U}} \cdot H_{\text{BS-U}}\right) + N_0}\)</p>
+          <br>
         <p><b>Throughput:</b>\(T_\text{U} = B_\text{U} \cdot \log_{2}\left(1 + \text{SINR}_\text{U}\right)\)</p>
+        <br>
         <p><b>Reward function</b> \(r_t = \kappa \cdot \sum_{\text{u} = 1}^{N_U} T_\text{U} \; - \; \beta \cdot \sum_{\text{BS} = 1}^{N_B} P_{\text{BS}} \;
            + \; \phi \cdot \text{Fairness}_{t}\)</p>
+           <br>
           <p><b>Optimisation goal:</b> \(\pi* = \arg \max_{\pi} \mathbb{E}\left[\sum_{t = 0}^{L} \gamma^{t}r_t
              | \pi\right]\)</p>
         </h2>
@@ -206,7 +214,7 @@
         <img src="./static/images/hetnet_deployment_map.jpg">
       <h2 class="subtitle has-text-centered">
         We instantiate BS locations from real BS location data in Cape Town, provided by a local
-         telecom operator and place $50$ users within the deployment polygon. The dataset 
+         telecom operator and place \(50\) users within the deployment polygon. The dataset 
          includes three macro BSs and ten micro BSs. Colors in all figures follow the evaluation 
          convention: Macro BS (red), Micro BS (blue), Users (yellow).
       </h2>
