@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="description"
+        content="Deep reinforcement learning algorithm for resource allocation in 
+         heterogeneous wireless networks.">
+  <meta name="keywords" content="DRL, Resource Allocation, Heterogeneous Networks">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Optimisation of Resource Allocation in Heterogeneous Wireless Networks Using Deep Reinforcement Learning</title>
+
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-PYVRSFMDRL"></script>
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script defer src="./static/js/slideshow.js"></script>
+  <script id="MathJax-script" async
+          src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+
+    gtag('js', new Date());
+
+    gtag('config', 'G-PYVRSFMDRL');
+  </script>
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
+        rel="stylesheet">
+
+  <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+  <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="./static/css/index.css">
+  <!-- <link rel="icon" href="./static/images/favicon.svg"> -->
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer src="./static/js/fontawesome.all.min.js"></script>
+  <script src="./static/js/bulma-carousel.min.js"></script>
+  <script src="./static/js/bulma-slider.min.js"></script>
+  <script src="./static/js/index.js"></script>
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="manifest" href="/site.webmanifest">
+</head>
+<body>
+
+<nav class="navbar" role="navigation" aria-label="main navigation">
+  <div class="navbar-brand">
+    <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+    </a>
+  </div>
+  <div class="navbar-menu">
+    <div class="navbar-start" style="flex-grow: 1; justify-content: center;">
+      <a class="navbar-item" href="https://oluwaseyiwater.github.io">
+      <span class="icon">
+          <i class="fas fa-home"></i>
+      </span>
+      </a>
+
+      <div class="navbar-item has-dropdown is-hoverable">
+        <a class="navbar-link">
+          More Research
+        </a>
+        <div class="navbar-dropdown">
+          <a class="navbar-item" href="https://oluwaseyiwater.github.io/wireless-optim/">
+            WirelessOptim
+          </a>
+          <a class="navbar-item" href="https://oluwaseyiwater.github.io/qppgrl.github.io/">
+            QuantumRL
+          </a>
+          <a class="navbar-item" href="https://oluwaseyiwater.github.io/meta-rl/">
+            MetaRL
+          </a>
+          <a class="navbar-item" href="https://causalwireless.github.io">
+            CausalWireless
+          </a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</nav>
+
+
+<section class="hero">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column has-text-centered">
+          <h1 class="title is-1 publication-title">Optimisation of Resource Allocation 
+           in Heterogeneous Wireless Networks Using Deep Reinforcement Learning</h1>
+          <div class="is-size-5 publication-authors">
+            <span class="author-block">
+              <a href="https://oluwaseyiwater.github.io">Oluwaseyi Giwa</a><sup>1, 2</sup>,</span>
+            <span class="author-block">
+              <a href="https://shocklab.net/">Jonathan Shock</a><sup>2, 3, 4</sup>,</span>
+            <span class="author-block">
+              <a href="https://www.linkedin.com/in/jacodutoit/">Jaco Du Toit</a><sup>5, 6</sup>,</span>
+            <span class="author-block">
+              <a href="#">Tobi Awodumila</a><sup>1, 2</sup></span>
+          </div>
+
+          <div class="is-size-5 publication-authors">
+            <span class="author-block"><sup>1</sup>African Institute for Mathematical Sciences,</span>
+            <span class="author-block"><sup>2</sup>University of Cape Town,</span>
+            <span class="author-block"><sup>3</sup>NiTheCS, Stellenbosch University,</span>
+            <span class="author-block"><sup>4</sup>INRS, Montreal,</span>
+            <span class="author-block"><sup>5</sup>Vodacom, South Africa,</span>
+            <span class="author-block"><sup>6</sup>EEE, Stellenbosch University</span>
+            
+
+          </div>
+
+          <div class="column has-text-centered">
+            <div class="publication-links">
+              <!-- PDF Link. -->
+              <span class="link-block">
+                <a href="./static/assets/Optimisation of Resource Allocation in Heterogeneous Wireless Networks Using Deep Reinforcement Learning.pdf"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fas fa-file-pdf"></i>
+                  </span>
+                  <span>PDF</span>
+                </a>
+              </span>
+              <span class="link-block">
+                <a href="#"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="ai ai-arxiv"></i>
+                  </span>
+                  <span>arXiv</span>
+                </a>
+              </span>
+              
+              <!-- Code Link. -->
+              <span class="link-block">
+                <a href="https://github.com/OluwaseyiWater/wireless_optim"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fab fa-github"></i>
+                  </span>
+                  <span>Code</span>
+                  </a>
+              </span>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="hero teaser">
+
+  <div class="container is-max-desktop">
+    <div class="hero-body">
+        <img src="./static/images/rl_hetnet.drawio_page.jpg">
+        <h2 class="subtitle has-text-centered">
+          We model control as an MDP and the RA controller as a single agent that 
+          interacts with the HetNet environment at discrete time steps 
+          \(t, \quad \text{for } t \in [0, 1, \dots, T - 1]\). This is done because 
+          the network's state at each time step fully captures the necessary information
+           to model the system's evolution based on the agent's action, satisfying the 
+           Markov property.
+           <p>\(\mathcal{M}=\left(\mathcal{S},\mathcal{A},\mathcal{P},R,\gamma\right)\)</p>
+           where \(s_t\!\in\!\mathcal{S}\) is the state, \(a_t\!\in\!\mathcal{A}\) is the 
+           action, \(\mathcal{P}\) is the transition kernel, \(R\) is the reward, and 
+           \(\gamma\!\in\!(0,1)\) is the discount factor.
+
+           <p><b>State space: \(s_t = \left[\vec{p_t}, \vec{I_t}, \mathbf{A}_t, \vec{x_t}^{\text{BS}},
+             \vec{x_t}^{\text{U}}\right]_{t \in T,\text{BS} \in N_B, \text{U} \in N_U}\)</b></p>
+            <p><b>Action space:</b> \(a_t = \left\{\left(p_{\text{BS}}^{\text{adj}}, w_{\text{BS}}^{\text{alloc}},
+              s_{\text{U}}^{\text{score}}\right)\right\}_{\text{BS} = 1}^{N_B}\)</p>
+            <p><b>Channel dynamics: The log-normal shadowing (\(\Psi_{\text{BS-U}}\)) and
+               downlink effective power gain (\(H_{\text{BS-U}}\))</b> \begin{align*}
+    \Psi_{\text{BS-U}} = 10^{\nicefrac{X_{\text{BS-U}}}{10}}, 
+    \quad X_{\text{BS-U}} \sim \mathcal{N}\left(0, \sigma_{\text{sh}}^{2}\right) \; \text{in dB}\\
+    H_{\text{BS-U}} = \frac{S_{\text{BS-U}}}{\left(d_{\text{BS-U}}\right)^{\eta} \cdot 
+    \Psi_{\text{BS-U}}}
+\end{align*}</p>
+        <p><b>SINR:</b> \(\text{SINR}_\text{U} = \frac{p_{\text{BS-U}} \cdot H_{\text{BS-U}}}{\sum_{\text{BS' \(\neq\) BS}}
+          \left(p_{\text{BS-U}} \cdot H_{\text{BS-U}}\right) + N_0}\)</p>
+        <p><b>Throughput:</b>\(T_\text{U} = B_\text{U} \cdot \log_{2}\left(1 + \text{SINR}_\text{U}\right)\)</p>
+        <p><b>Reward function</b> \(r_t = \kappa \cdot \sum_{\text{u} = 1}^{N_U} T_\text{U} \; - \; \beta \cdot \sum_{\text{BS} = 1}^{N_B} P_{\text{BS}} \;
+           + \; \phi \cdot \text{Fairness}_{t}\)</p>
+          <p><b>Optimisation goal:</b> \(\pi* = \arg \max_{\pi} \mathbb{E}\left[\sum_{t = 0}^{L} \gamma^{t}r_t
+             | \pi\right]\)</p>
+        </h2>
+    </div>
+  </div>
+
+  <div class="container is-max-desktop">
+    <div class="hero-body">
+        <img src="./static/images/hetnet_deployment_map.jpg">
+      <h2 class="subtitle has-text-centered">
+        We instantiate BS locations from real BS location data in Cape Town, provided by a local
+         telecom operator and place $50$ users within the deployment polygon. The dataset 
+         includes three macro BSs and ten micro BSs. Colors in all figures follow the evaluation 
+         convention: Macro BS (red), Micro BS (blue), Users (yellow).
+      </h2>
+    </div>
+  </div>
+</section>
+
+
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <!-- Abstract. -->
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Abstract</h2>
+        <div class="content has-text-justified">
+          <p>
+            Dynamic resource allocation in heterogeneous wireless networks (HetNets)
+             is challenging for traditional methods under varying user loads and channel conditions.
+              We propose a deep reinforcement learning (DRL) framework that jointly optimises 
+              transmit power, bandwidth, and scheduling via a multi-objective reward balancing
+               throughput, energy efficiency, and fairness. Using real base station coordinates,
+                we compare Proximal Policy Optimisation (PPO) and Twin Delayed Deep Deterministic 
+                Policy Gradient (TD3) against three heuristic algorithms in multiple network 
+                scenarios. Our results show that DRL frameworks outperform heuristic algorithms 
+                in optimising resource allocation in dynamic networks. These findings highlight 
+                key trade-offs in DRL design for future HetNets.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<section class="section">
+  <div class="container is-max-desktop">
+
+  
+
+    <!-- Results -->
+
+    <div class="slideshow-container">
+      <h2 class="title is-3">Results</h2>
+
+      <div class="mySlides fade">
+        <div class="numbertext">1 / 4</div>
+        <img src="./static/images/ba.jpg">
+        <div class="text">Normalised bandwidth allocation</div>
+      </div>
+
+      <div class="mySlides fade">
+        <div class="numbertext">2 / 4</div>
+        <img src="./static/images/pa.jpg">
+        <div class="text">Normalised power allocation</div>
+      </div>
+
+      <div class="mySlides fade">
+        <div class="numbertext">3 / 4</div>
+        <img src="./static/images/ss.jpg">
+        <div class="text">Normalised scheduling score</div>
+      </div>
+
+      <div class="mySlides fade">
+        <div class="numbertext">4 / 4</div>
+        <img src="./static/images/re.jpg">
+        <div class="text">Mean reward across seeds</div>
+      </div>
+    </div>
+    <br>
+
+    <div style="text-align: center">
+      <span class="dot"></span>
+      <span class="dot"></span>
+      <span class="dot"></span>
+      <span class="dot"></span>
+    </div>
+    
+
+
+
+    
+
+    <!-- Concurrent Work. -->
+    <div class="columns is-centered">
+      <div class="column is-full-width">
+        <h2 class="title is-3">Related Works</h2>
+
+        <div class="content has-text-justified">
+          <p>
+            There are lot of excellent work that were very useful for the completion of this work. You
+            can find them in our paper.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<section class="section" id="BibTeX">
+  <div class="container is-max-desktop content">
+    <h2 class="title">BibTeX</h2>
+    <pre><code>@article{wirelessoptim2026,
+  author    = {Oluwaseyi, Giwa and Jonathan, Shock and Jaco, Du Toit and Tobi, Awodumila},
+  title     = {Optimisation of Resource Allocation in Heterogeneous Wireless Networks Using Deep Reinforcement Learning},
+  journal   = {IEEE Wireless Communications and Networking Conference},
+  year      = {2026},
+}</code></pre>
+  </div>
+</section>
+
+
+<footer class="footer">
+  <div class="container">
+    <div class="content has-text-centered">
+      <a class="icon-link"
+         href="#">
+        <i class="fas fa-file-pdf"></i>
+      </a>
+      <a class="icon-link" href="https://github.com/OluwaseyiWater" class="external-link" disabled>
+        <i class="fab fa-github"></i>
+      </a>
+    </div>
+    <div class="columns is-centered">
+      <div class="column is-8">
+        <div class="content">
+          <p>
+            This website is licensed under a <a rel="license"
+                                                href="http://creativecommons.org/licenses/by-sa/4.0/">Creative
+            Commons Attribution-ShareAlike 4.0 International License</a>.
+          </p>
+          <p>
+            This means you are free to borrow the <a
+              href="https://github.com/nerfies/nerfies.github.io">source code</a> of this website,
+            we just ask that you link back to this page in the footer.
+            Please remember to remove the analytics code included in the header of the website which
+            you do not want on your website.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
