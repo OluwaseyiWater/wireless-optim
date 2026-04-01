@@ -163,45 +163,29 @@
 
   <div class="container is-max-desktop">
     <div class="hero-body">
-        <img src="./static/images/rl_hetnet.drawio_page.jpg">
+        <img src="./static/images/rl_hetnet (1)_page-0001.jpg">
         <h2 class="subtitle has-text-centered">
-          We model control as an MDP and the RA controller as a single agent that 
-          interacts with the HetNet environment at discrete time steps 
-          \(t, \quad \text{for } t \in [0, 1, \dots, T - 1]\). This is done because 
-          the network's state at each time step fully captures the necessary information
-           to model the system's evolution based on the agent's action, satisfying the 
-           Markov property.
-           <p>\(\mathcal{M}=\left(\mathcal{S},\mathcal{A},\mathcal{P},R,\gamma\right)\)</p>
-           where \(s_t\!\in\!\mathcal{S}\) is the state, \(a_t\!\in\!\mathcal{A}\) is the 
-           action, \(\mathcal{P}\) is the transition kernel, \(R\) is the reward, and 
-           \(\gamma\!\in\!(0,1)\) is the discount factor.
-           <br>
+          We consider a downlink HetNet operating within an O-RAN architecture. 
+          The network consists of a set of BSs, \(B = \{1, \dots, N_B\}\), comprising \(N_M\)
+           macro BSs and \(N_S\) micro BSs. These serve a set of user equipments (UEs) \(U = \{1, \dots, N_U\}\)
+           distributed stochastically within the coverage area.
+            The system is controlled by a centralised Near-RT 
+            RIC that hosts an xApp responsible for optimising radio resources at discrete 
+            time intervals \(t\)
+            <br>
            <br>
 
-           <p><b>State space:</b> \(s_t = \left[\vec{p_t}, \vec{I_t}, \mathbf{A}_t, \vec{x_t}^{\text{BS}},
-             \vec{x_t}^{\text{U}}\right]_{t \in T,\text{BS} \in N_B, \text{U} \in N_U}\)</p>
-             <br>
-            <p><b>Action space:</b> \(a_t = \left\{\left(p_{\text{BS}}^{\text{adj}}, w_{\text{BS}}^{\text{alloc}},
-              s_{\text{U}}^{\text{score}}\right)\right\}_{\text{BS} = 1}^{N_B}\)</p>
-              <br>
-            <p><b>Channel dynamics:</b> The log-normal shadowing (\(\Psi_{\text{BS-U}}\)) and
-               downlink effective power gain (\(H_{\text{BS-U}}\)) \begin{align*}
-    \Psi_{\text{BS-U}} = 10^{\frac{X_{\text{BS-U}}}{10}}, 
-    \quad X_{\text{BS-U}} \sim \mathcal{N}\left(0, \sigma_{\text{sh}}^{2}\right) \; \text{in dB}\\
-    H_{\text{BS-U}} = \frac{S_{\text{BS-U}}}{\left(d_{\text{BS-U}}\right)^{\eta} \cdot 
-    \Psi_{\text{BS-U}}}
-\end{align*}</p>
-<br>
-        <p><b>SINR:</b> \(\text{SINR}_\text{U} = \frac{p_{\text{BS-U}} \cdot H_{\text{BS-U}}}{\sum_{\text{BS' \(\neq\) BS}}
-          \left(p_{\text{BS-U}} \cdot H_{\text{BS-U}}\right) + N_0}\)</p>
-          <br>
-        <p><b>Throughput:</b>\(T_\text{U} = B_\text{U} \cdot \log_{2}\left(1 + \text{SINR}_\text{U}\right)\)</p>
-        <br>
-        <p><b>Reward function</b> \(r_t = \kappa \cdot \sum_{\text{u} = 1}^{N_U} T_\text{U} \; - \; \beta \cdot \sum_{\text{BS} = 1}^{N_B} P_{\text{BS}} \;
-           + \; \phi \cdot \text{Fairness}_{t}\)</p>
-           <br>
-          <p><b>Optimisation goal:</b> \(\pi* = \arg \max_{\pi} \mathbb{E}\left[\sum_{t = 0}^{L} \gamma^{t}r_t
-             | \pi\right]\)</p>
+           <p>We formulate the problem as a MDP \((\mathcal{S}, \mathcal{A}, \mathcal{P}, 
+            \mathcal{R})\). The agent (xApp) interacts with the environment (E2 nodes) 
+            as follows:</p>
+          <p>\textbf{State Space \(\mathcal{S}\)}: The state \(s_t\) aggregates global network observables available at the RIC:
+          \begin{equation}
+              s_t = \left\{\mathbf{p}_{t-1}, \{\mathbf{I}_{u}^{\rm{est}}\}_{u \in U}, \mathbf{L}_{\rm{geo}}\right\},
+          \end{equation}
+          where \(\mathbf{p}_{t - 1}\) is the previous power allocation,
+          \(\mathbf{I}_{u}^{\rm{est}}\) is the estimated interference measurement from UE 
+          channel quality indicator (CQI) reports, and \(\mathbf{L}_{\rm{geo}}\) 
+          encapsulates the fixed topology geometry.</p>
         </h2>
     </div>
   </div>
@@ -229,16 +213,17 @@
         <h2 class="title is-3">Abstract</h2>
         <div class="content has-text-justified">
           <p>
-            Dynamic resource allocation in heterogeneous wireless networks (HetNets)
-             is challenging for traditional methods under varying user loads and channel conditions.
-              We propose a deep reinforcement learning (DRL) framework that jointly optimises 
-              transmit power, bandwidth, and scheduling via a multi-objective reward balancing
-               throughput, energy efficiency, and fairness. Using real base station coordinates,
-                we compare Proximal Policy Optimisation (PPO) and Twin Delayed Deep Deterministic 
-                Policy Gradient (TD3) against three heuristic algorithms in multiple network 
-                scenarios. Our results show that DRL frameworks outperform heuristic algorithms 
-                in optimising resource allocation in dynamic networks. These findings highlight 
-                key trade-offs in DRL design for future HetNets.
+            Dynamic resource allocation in Open RAN (O-RAN) HetNets presents a complex optimisation 
+            challenge under varying user loads. We propose a Near-Real-Time 
+            RAN Intelligent Controller (Near-RT RIC) xApp utilising Deep Reinforcement Learning (DRL) to
+             jointly optimise transmit power, bandwidth slicing, and user scheduling. Leveraging real-world
+              network topologies, we benchmark Proximal Policy Optimisation (PPO) and 
+              Twin Delayed Deep Deterministic Policy Gradient (TD3) against standard heuristics. 
+              Our results demonstrate that the PPO-based xApp achieves a superior trade-off, reducing
+               network energy consumption by up to \(70\%\) in dense scenarios while improving user 
+               fairness by over \(30\%\) compared to throughput-greedy baselines. These findings 
+            validate the feasibility of centralised, energy-aware AI orchestration in 
+            future 6G architectures.
           </p>
         </div>
       </div>
@@ -258,25 +243,37 @@
       <h2 class="title is-3">Results</h2>
 
       <div class="mySlides fade">
-        <div class="numbertext">1 / 4</div>
-        <img src="./static/images/ba.jpg">
-        <div class="text">Normalised bandwidth allocation</div>
+        <div class="numbertext">1 / 6</div>
+        <img src="./static/images/Dense_Urban_Scenario (1).png">
+        <div class="text">Dense Urban</div>
       </div>
 
       <div class="mySlides fade">
-        <div class="numbertext">2 / 4</div>
-        <img src="./static/images/pa.jpg">
-        <div class="text">Normalised power allocation</div>
+        <div class="numbertext">2 / 6</div>
+        <img src="./static/images/Hotspot_Scenario (1).png">
+        <div class="text">Hotspot Scenario</div>
       </div>
 
       <div class="mySlides fade">
-        <div class="numbertext">3 / 4</div>
-        <img src="./static/images/ss.jpg">
-        <div class="text">Normalised scheduling score</div>
+        <div class="numbertext">3 / 6</div>
+        <img src="./static/images/Mixed_Scenario (1).png">
+        <div class="text">Mixed Scenario</div>
       </div>
 
       <div class="mySlides fade">
-        <div class="numbertext">4 / 4</div>
+        <div class="numbertext">4 / 6</div>
+        <img src="./static/images/Sparse_Suburban_Scenario (1).png">
+        <div class="text">Sparse Suburban Scenario</div>
+      </div>
+
+      <div class="mySlides fade">
+        <div class="numbertext">5 / 6</div>
+        <img src="./static/images/Time_Scale (1).png">
+        <div class="text">Time Complexity</div>
+      </div>
+
+      <div class="mySlides fade">
+        <div class="numbertext">6 / 6</div>
         <img src="./static/images/re.jpg">
         <div class="text">Mean reward across seeds</div>
       </div>
@@ -284,6 +281,8 @@
     <br>
 
     <div style="text-align: center">
+      <span class="dot"></span>
+      <span class="dot"></span>
       <span class="dot"></span>
       <span class="dot"></span>
       <span class="dot"></span>
@@ -318,7 +317,7 @@
     <pre><code>@article{wirelessoptim2026,
   author    = {Oluwaseyi, Giwa and Jonathan, Shock and Jaco, Du Toit and Tobi, Awodumila},
   title     = {Optimisation of Resource Allocation in Heterogeneous Wireless Networks Using Deep Reinforcement Learning},
-  journal   = {IEEE Wireless Communications and Networking Conference},
+  journal   = {European Conference on Networks and Communications (EuCNC) & 6G Summit},
   year      = {2026}
 }</code></pre>
   </div>
